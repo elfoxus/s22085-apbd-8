@@ -133,6 +133,29 @@ namespace apbd_8_s22085.Migrations
                     b.ToTable("Prescription");
                 });
 
+            modelBuilder.Entity("apbd_8_s22085.Database.Entities.PrescriptionMedicament", b =>
+                {
+                    b.Property<int>("IdMedicament")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPrescription")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("Dose")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdMedicament", "IdPrescription");
+
+                    b.HasIndex("IdPrescription");
+
+                    b.ToTable("PrescriptionMedicament");
+                });
+
             modelBuilder.Entity("apbd_8_s22085.Database.Entities.Prescription", b =>
                 {
                     b.HasOne("apbd_8_s22085.Database.Entities.Doctor", "Doctor")
@@ -152,14 +175,43 @@ namespace apbd_8_s22085.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("apbd_8_s22085.Database.Entities.PrescriptionMedicament", b =>
+                {
+                    b.HasOne("apbd_8_s22085.Database.Entities.Medicament", "Medicament")
+                        .WithMany("PrescriptionMedicaments")
+                        .HasForeignKey("IdMedicament")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("apbd_8_s22085.Database.Entities.Prescription", "Prescription")
+                        .WithMany("PrescriptionMedicaments")
+                        .HasForeignKey("IdPrescription")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicament");
+
+                    b.Navigation("Prescription");
+                });
+
             modelBuilder.Entity("apbd_8_s22085.Database.Entities.Doctor", b =>
                 {
                     b.Navigation("Prescriptions");
                 });
 
+            modelBuilder.Entity("apbd_8_s22085.Database.Entities.Medicament", b =>
+                {
+                    b.Navigation("PrescriptionMedicaments");
+                });
+
             modelBuilder.Entity("apbd_8_s22085.Database.Entities.Patient", b =>
                 {
                     b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("apbd_8_s22085.Database.Entities.Prescription", b =>
+                {
+                    b.Navigation("PrescriptionMedicaments");
                 });
 #pragma warning restore 612, 618
         }
