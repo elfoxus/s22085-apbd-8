@@ -21,7 +21,7 @@ public class PrescriptionController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetPrescriptionFor(int prescriptionId)
     {
-        var prescription = await _database.Prescriptions
+        var prescription = await _database.Prescription
             .Where(p => p.IdPrescription == prescriptionId)
             .Include(p => p.Doctor)
             .Include(p => p.Patient)
