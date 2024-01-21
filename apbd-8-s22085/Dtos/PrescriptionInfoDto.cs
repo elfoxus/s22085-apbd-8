@@ -2,8 +2,8 @@
 
 public record PrescriptionInfoDto(
     int IdPrescription,
-    DateOnly Date,
-    DateOnly DueDate,
+    DateTime Date,
+    DateTime DueDate,
     DoctorInfoDto Doctor,
     PatientInfoDto Patient,
     IEnumerable<MedicamentInfoDto> Medicaments);
@@ -12,9 +12,10 @@ public record PatientInfoDto(
     int IdPatient,
     string FirstName,
     string LastName,
-    DateOnly Birthdate);
+    DateTime Birthdate);
     
 public record MedicamentInfoDto(
+    int IdMedicament,
     string Name,
     string Description,
     string Type,
