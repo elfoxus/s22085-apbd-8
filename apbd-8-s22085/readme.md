@@ -4,7 +4,7 @@
 * Microsoft.EntityFrameworkCore.SqlServer
 * Microsoft.EntityFrameworkCore.Tools
 
-# Config
+## Config
 W appsettings.json:
 
 ```
